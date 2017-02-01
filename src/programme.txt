@@ -1,0 +1,7 @@
+init{
+String str = "abc"
+String str_copy = str
+String str2
+var1 = 5 + 3i
+var2
+}
