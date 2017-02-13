@@ -1,7 +1,5 @@
-init{
-String str = "abc"
-String str_copy = str
-String str2
-var1 = 5 + 3i
-var2
-}
+Str str1 = "abc"
+Str str1_copy = str1
+Str str1 = "bac"+"calaureat"
+Num var1 = 5 + 3i
+Num var2 #comment
