@@ -1,0 +1,8 @@
+"abc"„Str 2Ÿ
+Str 1„Str 3Ÿ
+Ÿ
+StrJoin("bac",Str 1)„Str 4Ÿ
+5+3Ω„BŸ
+CŸ
+561+652Ω„DŸ
+A+B„EŸ
