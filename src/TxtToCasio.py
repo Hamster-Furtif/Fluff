@@ -1,12 +1,15 @@
 char = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-forbiden = "init str num i for else while and or"
+statement = "if else for while"
+forbiden = "str num" + statement
 #+-ÀÁ^
 math = "+-*/^="
+cond = "|&<>="
 blank = "\t\n\r"
 includedChars = "\"'_"
 var = []
 strings = [[]]
-
+logic=["&&","||","!!","!|","==","!=","<=",">=","<",">"]
+logic_casio=["And","Or","Not", "Xor","=","È","É","Ê","<",">"]
 transpileWithComments = False
 
 def transpile(path, twc):
@@ -44,8 +47,11 @@ def cleanCode():
 def write():
     global LINES
     LINES = []
+    queue = []
     for i in range(0, len(code)):
         split = splitLine(code[i])
+
+        ### STR ###
         if split[0] == "Str":
             if(len(split)>1 and checkUnused(split[1])==(-1,-1)):
                 strings.append(split[1])
@@ -66,6 +72,7 @@ def write():
             else:
                 print("Error at line ", i, ": a variable with the name ", split[1], " is already registered")
 
+        ### NUM ###
         if split[0] == "Num":
             if(len(split)>1 and checkUnused(split[1])==(-1,-1)):
                 var.append(split[1])
@@ -85,15 +92,27 @@ def write():
             else:
                 print("Error at line ", i, ": a variable with the name ", split[1], " is already registered")
 
+        ### STATEMENT + QUEUE###
+        if split[0] in statement:
+            cap = split[0][0].capitalize()+split[0][1:]
+            LINES+=cap
+            LINES+=" "
+            LINES+=conditionToString(split[1:])
+            queue.append(getStatementEnd(cap))
+
+        if split[0]=='}':
+            LINES+=queue.pop()
+        
+
         LINES[-1]+="Ù\n"
         
-    file = open("casio.txt",'w')
+    file = open("casio.txt",'w', encoding="utf8")
     file.writelines(LINES)
     file.close()
     
     
 
-            
+        
     
 def getNumIndex(name):
     for i in range (0, len(var)):
@@ -145,13 +164,21 @@ def splitLine(string):
                 i+=1
             result.append(temp)
 
-        elif(string[i] in math or(string[i] in "{}") ):
+        elif(string[i] in math+cond):
+            temp=''
+            while i<len(string) and string[i] in math+cond+"(){}.":
+                temp += string[i]
+                i+=1
+            result.append(temp)
+
+        elif(string[i] in "(){}."):
             result.append(string[i])
             i+=1
+        
         elif(string[i] in blank):
             i+=1
         else:
-            # Erreur, caractère inattendu
+            # Error, unexpected character
             i+=1
     return result
 
@@ -160,7 +187,7 @@ def opToString(split):
     par="+-ÀÁ^="
     for i in range(0, len(split)):
         u=checkUnused(split[i]) 
-        if(u[0]==0):
+        if u[0]==0:
             final="//ERROR"
             break
         elif(u[0]==1):
@@ -207,14 +234,44 @@ def concatToString(split):
 
         return final
 
+def conditionToString(split):
+    final = ""
+    
+    for i in range(0,len(split)):
+        print(split[i])
+        
+        if split[i][0]==split[i][-1]=='"' or checkUnused(split[i])[0]==0:
+            c_split=[]
+            while i<len(split) and split[i] not in logic and split[i] not in "!==":
+                c_split.append(split[i])
+                i+=1
+            final  += concatToSring(split[c_split])
 
+        elif split[i] in "()":
+            final += split[i]
 
+        elif split[i] in logic:
+            final+=dictionary(split[i])
+            
+        elif split[i].isdigit() or checkUnused(split[i])[0]==1 or split[i]in "i.":
+            c_split=[]
+            while i<len(split) and split[i] not in logic and split[i] not in "({})":
+                c_split.append(split[i])
+                i+=1
+            final  += opToString(c_split)
 
+    return final
 
-
-
-
-
-
-
+def getStatementEnd(string):
+    if string in "IfWhile":
+        return string+"End"
+    elif string == "For":
+        return "Next"
+    else:
+        return ""
+def dictionary(string):
+    for i in range(0, len(logic)):
+        if string == logic[i]:
+            return logic_casio[i]
+    return ""
             

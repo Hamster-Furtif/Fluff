@@ -1,8 +1,14 @@
-"abc"„Str 2Ÿ
-Str 1„Str 3Ÿ
-Ÿ
-StrJoin("bac",Str 1)„Str 4Ÿ
-5+3Ω„BŸ
-CŸ
-561+652Ω„DŸ
-A+B„EŸ
+"abc"√£Str 2√ô
+Str 1√£Str 3√ô
+√ô
+StrJoin("bac",Str 1)√£Str 4√ô
+(5+2)+3¬Ω√£B√ô
+C√ô
+5.61+65.2¬Ω√£D√ô
+A+B√£E√ô
+If (A=B)√ô
+√ô
+While (A=3)√ô
+√ô
+WhileEnd√ô
+IfEnd√ô

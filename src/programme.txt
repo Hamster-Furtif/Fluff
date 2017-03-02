@@ -2,7 +2,13 @@ Str str1 = "abc"
 Str str1_copy = str1
 Str str1 = "doublon"
 Str str2 = "bac"+str1
-Num var1 = 5 + 3i
+Num var1 = (5+2) + 3i
 Num var2 #comment
 Num var3 = 5.61 + 65.2i
 Num var4 = var1 + var2
+if(var1==var2){
+	var1=3
+	while(var1==3){
+	var1=var2+1
+	}
+}
