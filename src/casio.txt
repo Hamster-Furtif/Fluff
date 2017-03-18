@@ -1,14 +1,20 @@
-"abc"ãStr 2Ù
-Str 1ãStr 3Ù
 Ù
-StrJoin("bac",Str 1)ãStr 4Ù
-(5+2)+3½ãBÙ
-CÙ
-5.61+65.2½ãDÙ
-A+BãEÙ
+"abc"ãStr 1Ù
+Str 1ãStr 2Ù
+Ù
+"bac"+Str 1ãStr 3Ù
+(5+2)+3½ãAÙ
+BÙ
+5.61+65.2½ãCÙ
+A+BãDÙ
+{1,2,A}ãList 1Ù
+[[1,2][3,A]]ãMat AÙ
 If (A=B)Ù
-Ù
+Then 3ãAÙ
 While (A=3)Ù
-Ù
+Isz BÙ
 WhileEndÙ
+"whomst'd've'ed"ãStr 1Ù
+Ù
 IfEndÙ
+mat1À{{1,2}{3,4}ãMat AÙ
